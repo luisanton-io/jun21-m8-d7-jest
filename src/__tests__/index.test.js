@@ -74,6 +74,35 @@ describe("Testing the products endpoints", () => {
         expect(response.status).toBe(200)
         expect(response.body.some(p => p._id.toString() === productResponse.body.product._id)).toBe(true)
     })
+    it("should test that the GET /products/:id endpoint is returning a product", async () => { 
+        const productResponse = await request.post("/products").send(validProduct)
+        expect(productResponse.status).toBe(201)
+
+        const response = await request.get(`/products/${productResponse.body.product._id}`)
+        expect(response.status).toBe(200)
+        expect(response.body.name).toBe(validProduct.name)
+    })
+
+    it("should test the PUT /products/:id endpoint is editing the product", async () => {
+        const productResponse = await request.post("/products").send(validProduct)
+        expect(productResponse.status).toBe(201)
+        
+        const response = await request.put(`/products/${productResponse.body.product._id}`).send({
+            name: "Test product is different",    
+            price: 10
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.name).toBe("Test product edited")
+    })
+
+    it("should test the DELETE /products/:id endpoint is deleting the product", async () => {
+        const productResponse = await request.post("/products").send(validProduct)
+        expect(productResponse.status).toBe(201)
+          
+        const response = await request.delete(`/products/${productResponse.body.product._id}`)
+        expect(response.status).toBe(200)
+        expect(response.body.message).toBe("Product deleted")
+    })
 
 
     // afterAll 
