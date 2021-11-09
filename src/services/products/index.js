@@ -31,7 +31,7 @@ productsRouter.get("/:id", async (req, res, next) => {
       const product = await ProductModel.findById(req.params.id)
       console.log(product)
       if(product){
-           res.status(201).send({ product });
+           res.status(200).send({ product });
       } else {
           res.status(404).send({message: `product with id ${req.params.id} not found :[`})
       }

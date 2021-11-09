@@ -76,8 +76,12 @@ describe("Testing the products endpoints", () => {
     })
  
     it("should test that the GET /products/:id endpoint is returning a valid product", async () => {
-        const response = await request.get("/products/:id")
-        expect(response.status).toBe(201)
+        const allProductsResponse = await request.get("/products")
+        const oneProduct = allProductsResponse.body[0]
+        const singleProductResponse = await request.get("/products/"+ oneProduct._id)
+        console.log(singleProductResponse.body)
+        expect(allProductsResponse.status).toBe(200)
+        expect(singleProductResponse.body.product._id).toBe(oneProduct._id)
     })
 
     // afterAll 
