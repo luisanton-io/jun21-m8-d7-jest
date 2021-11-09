@@ -76,7 +76,7 @@ describe("Testing the products endpoints", () => {
     })
  
     it("should test that the GET /products/:id endpoint is returning a valid product", async () => {
-        const product = await request.get("/products/:id").send(validProduct)
+        const response = await request.get("/products/:id")
         expect(response.status).toBe(201)
     })
 

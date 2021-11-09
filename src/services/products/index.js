@@ -26,9 +26,10 @@ productsRouter.post("/", async (req, res) => {
     res.status(201).send({ product });
 })
 
-productsRouter.get("/:id", async (req, res) => {
+productsRouter.get("/:id", async (req, res, next) => {
   try {
       const product = await ProductModel.findById(req.params.id)
+      console.log(product)
       if(product){
            res.status(201).send({ product });
       } else {
