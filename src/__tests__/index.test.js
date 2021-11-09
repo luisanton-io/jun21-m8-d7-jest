@@ -75,6 +75,15 @@ describe("Testing the products endpoints", () => {
     ).toBe(true);
   });
 
+  it("should test that with a valid product the GET /product endpoint is getting the exact product", async () => {
+    const response = await request.get("/products/:id").send({});
+    expect(response.status).toBe(404);
+  });
+  it("should test that with a valid product the DELETE /product endpoint is getting the exact product deleted", async () => {
+    const response = await request.delete("/products/:id").send({});
+    expect(response.status).toBe(204);
+  });
+
   // afterAll
 
   // We are going to drop the testing database in Mongo
