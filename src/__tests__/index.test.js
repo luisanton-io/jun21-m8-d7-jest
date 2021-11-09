@@ -74,7 +74,11 @@ describe("Testing the products endpoints", () => {
         expect(response.status).toBe(200)
         expect(response.body.some(p => p._id.toString() === productResponse.body.product._id)).toBe(true)
     })
-
+ 
+    it("should test that the GET /products/:id endpoint is returning a valid product", async () => {
+        const product = await request.get("/products/:id").send(validProduct)
+        expect(response.status).toBe(201)
+    })
 
     // afterAll 
 
