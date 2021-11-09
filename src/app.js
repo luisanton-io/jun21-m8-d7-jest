@@ -1,16 +1,20 @@
-import express from "express"
-import cors from "cors"
+import express from "express";
+import cors from "cors";
 import { productsRouter } from "./services/products/index.js";
 
 const app = express();
 
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 
-app.get('/test', (req, res) => {
-    res.send({ message: 'Test success' })
-})
+app.get("/test", (req, res) => {
+  res.send({ message: "Test success" });
+});
 
-app.use("/products", productsRouter)
+app.post("/sum", (req, res) => {
+  res.status(200).send({ result: req.body.numbers.reduce((a, c) => a + c) });
+});
 
-export { app }
+app.use("/products", productsRouter);
+
+export { app };
