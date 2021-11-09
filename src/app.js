@@ -12,5 +12,5 @@ app.get("/test", (req, res) => {
 });
 
 app.use("/products", productsRouter);
-console.log("Update?");
+
 export { app };
