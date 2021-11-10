@@ -87,10 +87,10 @@ describe("Testing the products endpoints", () => {
     it("should test that with an invalid product the GET /products/:id endpoint is returning a 404 error", async () => {
         const allProductsResponse = await request.get("/products")
         const oneProduct = allProductsResponse.body[0]
-        const singleProductResponse = await request.get("/products/")
+        const singleProductResponse = await request.get("/products/"+ oneProduct._id)
         console.log(singleProductResponse.body)
         // expect(singleProductResponse.status).toBe(404)
-        expect(singleProductResponse.body.product._id == undefined).toBe(true)
+        expect(singleProductResponse.body.product._id !== oneProduct._id).toBe(true)
         expect(singleProductResponse.status).toBe(404)
     })
 
